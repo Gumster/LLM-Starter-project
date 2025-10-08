@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local LLM Document Assistant</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Local LLM Document Assistant</h1>
+            <p>Ask questions about your documents using a local LLM</p>
+        </header>
+
+        <div class="main-content">
+            <div class="document-section">
+                <h2>Document Management</h2>
+                <form id="upload-form" enctype="multipart/form-data">
+                    <div class="file-input-container">
+                        <label for="file-upload" class="file-label">Choose Documents</label>
+                        <input type="file" id="file-upload" name="files" multiple>
+                        <span id="file-selected">No files selected</span>
+                    </div>
+                    <button type="submit" class="btn">Upload Documents</button>
+                </form>
+                <div class="document-list">
+                    <h3>Uploaded Documents</h3>
+                    <ul id="document-list">
+                        <!-- Documents will be listed here -->
+                    </ul>
+                </div>
+                <div class="action-buttons">
+                    <button id="process-btn" class="btn">Process Documents</button>
+                    <button id="train-btn" class="btn">Train Model on Documents</button>
+                    <button id="reset-btn" class="btn btn-danger">Reset Application</button>
+                </div>
+                <div id="status-message" class="status-message"></div>
+            </div>
+
+            <div class="chat-section">
+                <h2>Chat with your Documents</h2>
+                <div class="chat-container">
+                    <div id="chat-messages">
+                        <div class="message system">
+                            <p>Welcome! Upload some documents and ask questions about them.</p>
+                        </div>
+                    </div>
+                    <div class="input-area">
+                        <form id="prompt-form">
+                            <input type="text" id="prompt-input" placeholder="Enter your question..." required>
+                            <button type="submit" class="btn">Send</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="model-info">
+            <h3>Model Information</h3>
+            <p id="model-status">Model not loaded. Please check console for details.</p>
+        </div>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>
