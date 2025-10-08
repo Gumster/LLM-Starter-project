@@ -61,7 +61,7 @@ async def query_llm(prompt: str = Form(...)):
     print("Processing query... "+prompt)
     # Generate response from LLM
     response = llm_handler.generate_response(prompt, relevant_docs)
-    
+    print("Query complete")
     return {"response": response, "sources": [doc.metadata.get("source", "Unknown") for doc in relevant_docs]}
 
 @app.post("/train")
