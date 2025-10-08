@@ -36,6 +36,7 @@ pip install -r requirements.txt
 4. Ensure you have a GGUF model file in the `models` directory
    - The default configuration expects a model named `llama-2-7b-chat.Q2_K.gguf`
    - You can download GGUF models from [HuggingFace](https://huggingface.co/models?sort=trending&search=gguf)
+   - A [functional model](https://huggingface.co/TheBloke/Llama-2-7B-Chat-GGUF/blob/main/llama-2-7b-chat.Q2_K.gguf)
 
 ## Running the Application
 
