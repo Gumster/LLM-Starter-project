@@ -78,3 +78,11 @@ http://localhost:8000
 - `models/`: Directory for LLM models
 - `static/`: Contains CSS and JavaScript files
 - `templates/`: Contains HTML templates
+
+## Curl requests
+
+Curl requests can be performed utilising like so:
+```bash
+curl -X POST "http://localhost:8000/query?k=12&rerank=true" -F "prompt=When did Warwick die"
+```
+NB k parameter increases re-ranking (accuracy). Values of k greater than 16 probably require GPU support (k=8 seems ok).
