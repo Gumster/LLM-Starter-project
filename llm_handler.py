@@ -68,6 +68,7 @@ class LLMHandler:
             # Create prompt template with context
             template = """
             You are a helpful AI assistant. Use the following context to answer the question.
+            If the answer isn't in the context, say you don't know.
             
             Context:
             {context}
@@ -92,6 +93,32 @@ class LLMHandler:
             response = self.llm(formatted_prompt)
             return response.strip()
         
+        except Exception as e:
+            return f"Error generating response: {str(e)}"
+
+    # RetrievalQA chain using retriever and constrained prompt
+    QA_PROMPT = PromptTemplate(
+        input_variables=["context", "question"],
+        template=(
+            "You are a helpful assistant. Use ONLY the provided context to answer.\n"
+            "If the answer is not explicitly in the context, say 'I don't know'.\n\n"
+            "Context:\n{context}\n\nQuestion:\n{question}\n\nAnswer:"
+        )
+    )
+
+    def generate_response_with_retriever(self, question: str, retriever) -> str:
+        """Generate a response using a RetrievalQA chain and the provided retriever."""
+        if not self.llm:
+            return "LLM not initialized. Please check if the model file exists and is accessible."
+        try:
+            chain = RetrievalQA.from_chain_type(
+                llm=self.llm,
+                chain_type="stuff",
+                retriever=retriever,
+                return_source_documents=False,
+                chain_type_kwargs={"prompt": self.QA_PROMPT}
+            )
+            return chain.run(question)
         except Exception as e:
             return f"Error generating response: {str(e)}"
     
